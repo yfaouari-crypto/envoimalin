@@ -10,9 +10,9 @@ Le TD demande un SWOT **individuel** puis un SWOT **d'équipe** pour ce projet. 
 
 | Forces | Faiblesses |
 |---|---|
-| Parcours économie-gestion : à l'aise avec les notions de finance (taux de change, frais, marges) | Arrivé en MIAGE en L3 : moins d'années de pratique en développement que d'autres |
+| Parcours économie-gestion : à l'aise avec les notions de finance (taux de change, frais, marges) | Arrivé en MIAGE en L3 : moins de pratique en développement |
 | Connaît le problème de l'intérieur (envois d'argent entre la France et la Tunisie) | Porte à la fois le rôle de PO et une grande partie du développement : risque de surcharge |
-| Expérience business : Business Developer chez ReplySeal (start-up d'agents IA) et préparation d'une stratégie go-to-market : sait lancer un produit, définir sa cible et aller la chercher | |
+| Expérience en développement commercial et lancement de produit (ReplySeal) | |
 | Sens du produit et de la présentation | |
 
 | Opportunités | Menaces |
@@ -24,6 +24,7 @@ Le TD demande un SWOT **individuel** puis un SWOT **d'équipe** pour ce projet. 
 
 | Forces | Faiblesses |
 |---|---|
+| Parcours économie-gestion : à l'aise avec les notions de finance | Arrivé en MIAGE en L3 : moins de pratique en développement |
 | Organisation et suivi : tient le Kanban et le rythme des cérémonies | Rôle de Scrum Master découvert pendant ce projet |
 | Regard extérieur au code : repère ce qui n'est pas clair pour un utilisateur | Moins impliqué dans la partie technique |
 | Connaît les envois d'argent depuis la Côte d'Ivoire | |
@@ -36,6 +37,7 @@ Le TD demande un SWOT **individuel** puis un SWOT **d'équipe** pour ce projet. 
 
 | Forces | Faiblesses |
 |---|---|
+| Parcours économie-gestion : à l'aise avec les notions de finance | Arrivé en MIAGE en L3 : moins de pratique en développement |
 | Rigueur : relecture du code et vérification des calculs | N'a pas écrit la majorité du code : doit le relire en profondeur pour le maîtriser |
 | Attention à la fiabilité des données | |
 
@@ -49,6 +51,7 @@ Le TD demande un SWOT **individuel** puis un SWOT **d'équipe** pour ce projet. 
 
 | Forces | Faiblesses |
 |---|---|
+| Toute l'équipe vient d'économie-gestion : à l'aise avec la finance (taux, frais, marges) | Tous arrivés en MIAGE en L3 : peu de pratique du développement |
 | Rôles complémentaires : produit (Youssef), organisation (Ariel), qualité (Imhotep) | Équipe de 3, alors que le TD conseille 4 à 6 personnes : chacun porte plusieurs casquettes |
 | Deux membres connaissent personnellement les envois d'argent à l'étranger (Tunisie pour Youssef, Côte d'Ivoire pour Ariel) | Le code dépend beaucoup d'une seule personne |
 | Site en ligne, qui fonctionne avec des données réelles | Peu d'expérience préalable de Scrum |
