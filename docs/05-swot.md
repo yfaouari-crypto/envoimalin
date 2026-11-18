@@ -12,7 +12,7 @@ Le TD demande un SWOT **individuel** puis un SWOT **d'équipe** pour ce projet. 
 |---|---|
 | Parcours économie-gestion : à l'aise avec les notions de finance (taux de change, frais, marges) | Arrivé en MIAGE en L3 : moins de pratique en développement |
 | Connaît le problème de l'intérieur (envois d'argent entre la France et la Tunisie) | Porte à la fois le rôle de PO et une grande partie du développement : risque de surcharge |
-| Expérience en développement commercial et lancement de produit (ReplySeal) | |
+| Expérience en développement commercial et lancement de produit| |
 | Sens du produit et de la présentation | |
 
 | Opportunités | Menaces |
