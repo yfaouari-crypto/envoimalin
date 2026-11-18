@@ -26,7 +26,7 @@ Le TD demande un SWOT **individuel** puis un SWOT **d'équipe** pour ce projet. 
 |---|---|
 | Organisation et suivi : tient le Kanban et le rythme des cérémonies | Rôle de Scrum Master découvert pendant ce projet |
 | Regard extérieur au code : repère ce qui n'est pas clair pour un utilisateur | Moins impliqué dans la partie technique |
-| Connaît le problème de l'intérieur : ses parents lui envoient de l'argent depuis la Côte d'Ivoire | |
+| Connaît les envois d'argent depuis la Côte d'Ivoire | |
 
 | Opportunités | Menaces |
 |---|---|
