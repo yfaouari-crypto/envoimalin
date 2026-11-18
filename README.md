@@ -19,7 +19,7 @@ Beaucoup de services affichent « 0 € de frais » mais appliquent un taux de c
 - **Toutes les devises** (153), au départ comme à l'arrivée, avec une barre de recherche (code, nom ou pays).
 - **Taux réel du jour**, mis à jour automatiquement.
 - **Comparaison service par service** avec des tarifs relevés en direct : frais, taux appliqué, marge cachée, coût total, montant reçu, date du relevé.
-- **Calcul dans les deux sens** : « j'envoie 500 € » ou « ils doivent recevoir 5 000 MAD ».
+- **Calcul dans les deux sens** : « j'envoie 500 € » ou « ils doivent recevoir 200 000 francs CFA (XOF) ».
 - **Flèche d'échange** des deux devises en un clic.
 - **Filtre** banques / services de transfert.
 - **Économie** sur l'envoi et sur un an, et **graphique** du coût total.

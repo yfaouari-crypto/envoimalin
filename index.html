@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>EnvoiMalin · comparez les frais d'envoi d'argent</title>
-<meta name="description" content="Combien vos proches reçoivent vraiment ? Comparez frais et taux de change des services d'envoi d'argent de la France vers le Maroc et la Tunisie.">
+<meta name="description" content="Combien vos proches reçoivent vraiment ? Comparez frais et taux de change des services d'envoi d'argent depuis la France, vers toutes les devises du monde.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700&display=swap" rel="stylesheet">
 <style>
@@ -149,7 +149,7 @@ footer{border-top:1px solid var(--line);padding:18px max(4vw,16px);color:var(--m
       <button type="button" class="swap" id="swap" aria-label="Échanger les deux devises" title="Échanger les deux devises"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h15"/><path d="M15 4l4 4-4 4"/><path d="M20 16H5"/><path d="M9 12l-4 4 4 4"/></svg></button>
       <div class="side" id="sideRecv">
         <label for="recvAmt">Ils reçoivent</label>
-        <div class="money"><input id="recvAmt" inputmode="decimal" autocomplete="off"><span id="recvCur">MAD</span></div>
+        <div class="money"><input id="recvAmt" inputmode="decimal" autocomplete="off"><span id="recvCur">TND</span></div>
         <div class="picker" id="toPick"></div>
       </div>
     </div>
@@ -251,7 +251,7 @@ let curNames=null;try{curNames=new Intl.DisplayNames(["fr"],{type:"currency"})}c
 const curName=c=>{let n=c;try{n=curNames?curNames.of(c):c}catch(e){}return n&&n!==c?n.charAt(0).toUpperCase()+n.slice(1):c};
 const label=c=>`${c} · ${curName(c)}${COUNTRY[c]?" · "+COUNTRY[c]:""}`;
 
-let state={mode:"send",from:"EUR",to:"MAD",filter:"all",rates:null,rateDate:null,live:false};
+let state={mode:"send",from:"EUR",to:"TND",filter:"all",rates:null,rateDate:null,live:false};
 try{const s=JSON.parse(localStorage.getItem("envoimalin")||"{}");if(ALL_CODES.includes(s.from))state.from=s.from;if(ALL_CODES.includes(s.to))state.to=s.to;if(s.mode==="recv"||s.mode==="send")state.mode=s.mode;if(s.value)(state.mode==="recv"?$("recvAmt"):$("sendAmt")).value=s.value}catch(e){}
 const activeInput=()=>state.mode==="recv"?$("recvAmt"):$("sendAmt");
 const otherInput=()=>state.mode==="recv"?$("sendAmt"):$("recvAmt");
