@@ -13,8 +13,8 @@ Pour un service donné :
 **Calcul inverse** (montant à recevoir X connu) :
 montant à envoyer = (X ÷ taux appliqué + frais fixes) ÷ (1 − frais en %)
 
-**Exemple vérifié à la main** : 1 000 € vers le Maroc, taux réel 10,85, frais de 4,15 €, sans marge.
-(1 000 − 4,15) × 10,85 = 995,85 × 10,85 = **10 804,97 MAD**, comme dans le comparatif publié (10 805 MAD).
+**Exemple vérifié à la main** : 1 000 € vers la Tunisie avec MoneyGram (relevé du 18 novembre 2026), frais de 0,99 €, taux appliqué 3,31788.
+(1 000 − 0,99) × 3,31788 = 999,01 × 3,31788 = **3 314,60 TND**, comme le montant affiché par le site (3 314,598 TND).
 
 ## D'où viennent les données
 

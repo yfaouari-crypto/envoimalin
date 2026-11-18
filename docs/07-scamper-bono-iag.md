@@ -7,7 +7,7 @@
 **Le but** :
 - Comment améliorer l'idée ? Rendre visible le coût **réel** d'un envoi, marge cachée comprise.
 - Comment résoudre le problème ? Donner, en quelques secondes, le service qui fait perdre le moins d'argent.
-- Comment améliorer une fonctionnalité ? Rendre la comparaison fiable pour **toutes** les devises, pas seulement l'euro vers le dirham.
+- Comment améliorer une fonctionnalité ? Rendre la comparaison fiable pour **toutes** les devises, pas seulement l'euro vers le dinar tunisien.
 
 ## SCAMPER
 
@@ -17,7 +17,7 @@
 | **C** · Combiner | Que combiner pour multiplier les usages ? | Combiner le **taux réel du jour**, les **tarifs des services** et les **moyennes de la Banque mondiale** dans un seul écran. | ✅ Fait |
 | **A** · Adapter | Quels changements pour un autre contexte ? | Adapter l'outil aux **étudiants en échange** (euro vers dollar canadien, livre…), pas seulement à la diaspora : d'où toutes les devises. | ✅ Fait (Sprint 3) |
 | **M** · Modifier | Que modifier pour l'améliorer ? | Afficher le **coût total** au lieu des seuls frais, et l'**économie sur un an** pour rendre l'enjeu concret. | ✅ Fait |
-| **P** · Proposer | Quels autres usages ? | Calculer **l'inverse** (« ils doivent recevoir 5 000 MAD ») ; à terme, une **alerte de taux**. | ✅ Calcul inverse · Alerte en V2 |
+| **P** · Proposer | Quels autres usages ? | Calculer **l'inverse** (« ils doivent recevoir 200 000 XOF ») ; à terme, une **alerte de taux**. | ✅ Calcul inverse · Alerte en V2 |
 | **E** · Éliminer | Que retirer pour simplifier ? | Supprimer la **création de compte** et le champ « fréquence » : moins de saisie, aucune donnée personnelle. | ✅ Fait |
 | **R** · Réorganiser | Comment réorganiser pour être plus efficace ? | Placer « Vous envoyez » et « Ils reçoivent » **côte à côte** avec une flèche d'échange, et classer du moins cher au plus cher. | ✅ Fait (Sprint 3) |
 

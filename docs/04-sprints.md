@@ -33,7 +33,7 @@ Sprints de 2 semaines. Pour chaque sprint : l'objectif, ce qui a été livré, c
 
 **Tâches** : formulaire montant + devises ; appel au service de taux du jour ; premier tableau de comparaison ; formule du montant reçu.
 
-**Review** : on saisit 500 €, on choisit le dirham marocain, et le site affiche le taux du jour et le montant reçu pour chaque service.
+**Review** : on saisit 500 €, on choisit le dinar tunisien, et le site affiche le taux du jour et le montant reçu pour chaque service.
 
 **Rétrospective** : on garde la vérification des calculs sur un exemple fait à la main. À améliorer : les frais saisis à la main deviennent vite faux. Action : chercher une source de tarifs mise à jour automatiquement.
 
@@ -41,15 +41,15 @@ Sprints de 2 semaines. Pour chaque sprint : l'objectif, ce qui a été livré, c
 
 **Tâches** : tri du moins cher au plus cher ; badge « Meilleur choix » ; calcul et affichage de la marge cachée ; date du relevé et lien officiel ; filtre banques / services de transfert ; branchement des tarifs en direct.
 
-**Review** : sur 1 000 € envoyés au Maroc, le site montre l'écart entre le service le moins cher et le plus cher, et combien chacun prend en marge cachée.
+**Review** : sur 1 000 € envoyés en Côte d'Ivoire, le site montre l'écart entre le service le moins cher et le plus cher, et combien chacun prend en marge cachée.
 
-**Rétrospective** : objectif tenu. À améliorer : penser aux paires de devises sans tarif publié (dirham ou dinar vers l'euro).
+**Rétrospective** : objectif tenu. À améliorer : penser aux paires de devises sans tarif publié (par exemple du dinar tunisien vers l'euro).
 
 ## Sprint 3 · Pratique au quotidien
 
 **Tâches** : calcul inverse ; flèche d'échange des devises ; recherche de devise ; carte d'économie (envoi et année) ; graphique du coût total.
 
-**Review** : « Ma mère doit recevoir 5 000 dirhams » : le site donne le montant à envoyer pour chaque service. La flèche inverse EUR et TND en un clic.
+**Review** : « Ma mère doit recevoir 200 000 francs CFA » : le site donne le montant à envoyer pour chaque service. La flèche inverse EUR et TND en un clic.
 
 **Rétrospective** : on garde la relecture croisée. À améliorer : tester plus tôt sur téléphone.
 
@@ -71,9 +71,9 @@ Sprints de 2 semaines. Pour chaque sprint : l'objectif, ce qui a été livré, c
 
 ## Scénario de démonstration (3 minutes)
 
-1. Ouvrir le site : 500 € vers le dirham marocain. Le classement s'affiche avec les tarifs du jour.
+1. Ouvrir le site : 500 € vers le dinar tunisien. Le classement s'affiche avec les tarifs du jour.
 2. Ouvrir la fiche du premier et du dernier service : frais, marge cachée, date du relevé.
 3. Montrer la carte « Économie sur un an ».
-4. Taper dans « Ils reçoivent » : 5 000 MAD. Le site calcule ce qu'il faut envoyer.
+4. Choisir le franc CFA (XOF) et taper dans « Ils reçoivent » : 200 000. Le site calcule ce qu'il faut envoyer.
 5. Chercher « roupie » dans la liste des devises, puis échanger les devises avec la flèche.
 6. Choisir TND → EUR : montrer l'encadré qui explique pourquoi aucun service ne publie de tarif.

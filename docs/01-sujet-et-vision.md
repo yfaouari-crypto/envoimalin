@@ -16,14 +16,17 @@ Quand on envoie de l'argent à sa famille à l'étranger, on paie deux choses :
 La deuxième partie ne se voit presque jamais. Beaucoup de services annoncent « 0 € de frais » et se rémunèrent uniquement sur le taux. Résultat :
 
 - selon la Banque mondiale, envoyer de l'argent coûte en moyenne **6,49 %** du montant dans le monde, et **14,55 %** en passant par une banque (rapport *Remittance Prices Worldwide* n° 53, mars 2025) ;
-- vers le Maroc, sur un envoi de 1 000 €, l'écart entre le service le moins cher et le plus cher peut atteindre **environ 80 €** (comparatif Wafir.ma, mai 2026).
+- vers la Tunisie, sur un envoi de 1 000 €, l'écart entre le service le moins cher et le plus cher atteignait **environ 64 €** le 18 novembre 2026 (3 314,60 TND avec MoneyGram contre 3 103,34 TND avec ABN AMRO) ;
+- vers la Côte d'Ivoire, pour le même envoi, l'écart était d'**environ 48 €** (655 032 contre 623 440 francs CFA), alors que le franc CFA a un taux fixe avec l'euro.
+
+*Tarifs relevés sur notre site à partir du comparateur public de Wise.*
 
 ## La cible
 
 | Persona | Situation | Ce qu'il veut savoir |
 |---|---|---|
 | **Karim, 21 ans, étudiant tunisien à Bordeaux** | Reçoit de l'argent de ses parents chaque mois | Quel service fait perdre le moins d'argent à sa famille |
-| **Nadia, 45 ans, salariée, diaspora marocaine** | Envoie 300 à 500 € par mois à sa mère | Combien sa mère reçoit vraiment, et où |
+| **Aya, 45 ans, salariée, diaspora ivoirienne** | Envoie 300 à 500 € par mois à sa mère à Abidjan | Combien sa mère reçoit vraiment, et où |
 | **Lucas, 23 ans, en échange au Canada** | Envoie ponctuellement des euros vers le dollar canadien | Si sa banque ou un service en ligne est moins cher |
 
 ## La solution
@@ -34,7 +37,7 @@ Un site web, simple et gratuit :
 2. le site affiche, **service par service**, ce que le bénéficiaire reçoit vraiment : frais, marge cachée, taux appliqué, coût total ;
 3. il classe les services du moins cher au plus cher et montre l'économie possible sur un an.
 
-Le calcul inverse est aussi possible : « mes proches doivent recevoir 5 000 dirhams, combien dois-je envoyer ? ».
+Le calcul inverse est aussi possible : « mes proches doivent recevoir 200 000 francs CFA, combien dois-je envoyer ? ».
 
 ## Vision produit (en une phrase)
 
