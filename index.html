@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EnvoiMalin · comparez les frais d'envoi d'argent</title>
+<meta name="description" content="Combien vos proches reçoivent vraiment ? Comparez frais et taux de change des services d'envoi d'argent de la France vers le Maroc et la Tunisie.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700&display=swap" rel="stylesheet">
+<style>
+[hidden]{display:none!important}
+:root{color-scheme:light dark;--bg:light-dark(#ffffff,#0e1416);--panel:light-dark(#f3f6f6,#162023);--line:light-dark(#dbe3e3,#2a383c);--ink:light-dark(#10201f,#eaf2f1);--mute:light-dark(#4a5a5a,#a3b4b3);--acc:light-dark(#0f766e,#5fd4c4);--accInk:light-dark(#ffffff,#0e1416);--pos:light-dark(#047857,#4fd1a5);--neg:light-dark(#b42318,#ff8a7a);--posBg:light-dark(#d1fae5,#123a2f);--negBg:light-dark(#fee4e2,#3d1d19);--warnBg:light-dark(#fff4d6,#3a2f12)}
+*{box-sizing:border-box;min-width:0}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:16px/1.55 Inter,system-ui,sans-serif;overflow-x:clip}
+h1,h2,h3{font-family:"Inter Tight",Inter,sans-serif;letter-spacing:-.02em;line-height:1.1;margin:0}
+h1{font-size:clamp(30px,4.6vw,46px)}
+h2{font-size:22px}
+h3{font-size:17px}
+a{color:var(--acc)}
+button,input,select{font:inherit;font-size:16px;color:inherit}
+button{cursor:pointer;min-height:44px;border-radius:10px;border:1px solid var(--line);background:var(--bg);padding:0 16px;font-weight:600}
+button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+input,select{min-height:48px;border:1px solid var(--line);border-radius:10px;padding:0 12px;background:var(--bg);width:100%}
+label{font-weight:600;font-size:14px;display:block;margin-bottom:4px}
+.amt{white-space:nowrap;font-variant-numeric:tabular-nums}
+.p{color:var(--pos)}.n{color:var(--neg)}
+header{display:flex;align-items:center;gap:12px;padding:12px max(4vw,16px);border-bottom:1px solid var(--line)}
+.logo{display:flex;align-items:center;gap:10px;font:700 20px "Inter Tight",sans-serif}
+.logo i{width:34px;height:34px;border-radius:10px;background:var(--acc);display:grid;place-items:center}
+header nav{margin-left:auto;display:flex;gap:16px;font-size:14px}
+header nav a{color:var(--mute);text-decoration:none}
+header nav a:hover{color:var(--ink)}
+main{max-width:1080px;margin:0 auto;padding:28px max(3vw,16px) 56px}
+.intro{max-width:46em}
+.intro p{color:var(--mute);margin:10px 0 0;font-size:17px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px}
+.sim{margin-top:22px;display:grid;gap:16px}
+.pair{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:14px;align-items:center}
+.side{display:grid;gap:8px}
+.side label{margin:0}
+.side.active .money input{border-color:var(--acc);box-shadow:0 0 0 1px var(--acc)}
+.side:not(.active) .money input{background:var(--panel)}
+.swap{width:52px;height:52px;min-height:52px;padding:0;border-radius:50%;display:grid;place-items:center;background:var(--acc);border-color:var(--acc);color:var(--accInk);margin-top:22px;transition:transform .25s}
+.swap svg{width:24px;height:24px}
+.hint{margin:0;font-size:14px;color:var(--mute)}
+.picker{position:relative}
+.pickField{position:relative}
+.pickField .mag{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:18px;height:18px;color:var(--mute);pointer-events:none}
+.pickField .chev2{position:absolute;right:10px;top:50%;transform:translateY(-50%);width:22px;height:22px;color:var(--mute);cursor:pointer;padding:2px;transition:transform .2s}
+.picker.open .chev2{transform:translateY(-50%) rotate(180deg)}
+.pickInput{padding:0 40px 0 38px;font-weight:500;text-overflow:ellipsis}
+.picker.open .pickInput{border-color:var(--acc);box-shadow:0 0 0 1px var(--acc)}
+.pickPanel{position:absolute;z-index:20;top:calc(100% + 6px);left:0;right:0;background:var(--bg);border:1px solid var(--line);border-radius:12px;box-shadow:0 12px 32px rgb(0 0 0 / .18);padding:8px;display:grid;gap:6px}
+.pickHelp{font-size:12px;color:var(--mute);margin:0 4px}
+.pickList{list-style:none;margin:0;padding:0;max-height:300px;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:var(--acc) var(--panel)}
+.pickList::-webkit-scrollbar{width:10px}
+.pickList::-webkit-scrollbar-track{background:var(--panel);border-radius:10px}
+.pickList::-webkit-scrollbar-thumb{background:var(--acc);border-radius:10px;border:2px solid var(--panel)}
+.pickList .grp{font-size:12px;font-weight:700;color:var(--mute);text-transform:uppercase;letter-spacing:.04em;padding:8px 10px 4px;position:sticky;top:0;background:var(--bg)}
+.pickList [role=option]{display:flex;gap:10px;align-items:baseline;padding:9px 10px;border-radius:8px;cursor:pointer;font-size:15px}
+.pickList [role=option] b{min-width:3em}
+.pickList [role=option] span{color:var(--mute)}
+.pickList [role=option].cur{background:var(--panel)}
+.pickList [role=option][aria-selected=true]{color:var(--acc)}
+.pickList [role=option][aria-selected=true] b::after{content:" ✓"}
+.pickList .none{padding:12px 10px;color:var(--mute);font-size:14px}
+.money{position:relative}
+.money input{padding-right:58px;font-size:20px;font-weight:700}
+.money span{position:absolute;right:14px;bottom:13px;color:var(--mute);font-weight:600}
+.rate{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;font-size:14px;color:var(--mute)}
+.rate b{color:var(--ink);font-size:16px}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--pos);display:inline-block;margin-right:6px}
+.dot.off{background:var(--neg)}
+.err{color:var(--neg);font-weight:600;margin:0;font-size:14px}
+.err:empty{display:none}
+.filters{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.filters span{font-size:14px;color:var(--mute);margin-right:4px}
+.filters button{min-height:36px;font-size:14px;font-weight:500;border-radius:99px}
+.filters button[aria-pressed=true]{background:var(--acc);color:var(--accInk);border-color:var(--acc)}
+.resHead{display:flex;flex-wrap:wrap;gap:8px 16px;justify-content:space-between;align-items:baseline;margin:30px 0 12px}
+.resHead p{margin:0;color:var(--mute);font-size:14px}
+.list{display:grid;gap:10px}
+.prov{border:1px solid var(--line);border-radius:14px;background:var(--bg)}
+.prov.best{border:2px solid var(--acc)}
+.prov summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr) minmax(0,1fr) auto;gap:12px;align-items:center;padding:14px 16px}
+.prov summary::-webkit-details-marker{display:none}
+.pname b{font-size:17px;display:block}
+.pname small{color:var(--mute);font-size:13px}
+.badge{display:inline-block;font-size:12px;font-weight:700;padding:2px 8px;border-radius:99px;background:var(--acc);color:var(--accInk);margin-left:6px;vertical-align:2px}
+.big{font:700 clamp(19px,2.4vw,24px) "Inter Tight",sans-serif}
+.lbl{display:block;font-size:12px;color:var(--mute);font-weight:500}
+.cost{font-weight:700}
+.chev{width:20px;height:20px;transition:transform .2s;color:var(--mute)}
+details[open] .chev{transform:rotate(180deg)}
+.detail{padding:0 16px 16px;display:grid;gap:12px}
+.dgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,160px),1fr));gap:10px}
+.dgrid div{background:var(--panel);border-radius:10px;padding:10px 12px}
+.dgrid b{display:block;font-size:16px}
+.detail p{margin:0;font-size:14px;color:var(--mute)}
+.go{display:inline-flex;align-items:center;gap:6px;font-weight:700;text-decoration:none;min-height:44px;padding:0 14px;border-radius:10px;border:1px solid var(--acc);width:fit-content}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-size:12px;padding:2px 8px;border-radius:99px;border:1px solid var(--line);background:var(--panel)}
+.grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;margin-top:28px;align-items:start}
+.save b{font:700 clamp(26px,4vw,34px) "Inter Tight",sans-serif;display:block;margin:8px 0 4px}
+.save p{margin:0;color:var(--mute);font-size:15px}
+.bars{display:grid;gap:8px;margin-top:12px}
+.bar{display:grid;grid-template-columns:8.5em minmax(0,1fr) 5.5em;gap:10px;align-items:center;font-size:14px}
+.bar .t{height:16px;border-radius:4px;background:var(--line);overflow:hidden}
+.bar .t i{display:block;height:100%;background:var(--neg);border-radius:4px}
+.bar.best .t i{background:var(--pos)}
+.bar .amt{text-align:right}
+.edu{margin-top:28px}
+.edu ol{margin:10px 0 0;padding-left:20px;display:grid;gap:6px}
+.notice{margin-top:28px;background:var(--warnBg);border:1px solid var(--line);border-radius:14px;padding:14px 16px;font-size:14px}
+.notice p{margin:0}
+.sources{margin-top:14px;font-size:13px;color:var(--mute)}
+.sources ul{margin:6px 0 0;padding-left:18px}
+footer{border-top:1px solid var(--line);padding:18px max(4vw,16px);color:var(--mute);font-size:13px;text-align:center}
+.empty{padding:24px;text-align:center;color:var(--mute)}
+.spin{width:18px;height:18px;border:3px solid var(--line);border-top-color:var(--acc);border-radius:50%;animation:sp .8s linear infinite;display:inline-block;vertical-align:-4px;margin-right:8px}
+@keyframes sp{to{transform:rotate(360deg)}}
+.genNote{background:var(--warnBg);border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-size:14px;margin-bottom:10px}
+@media(max-width:820px){.grid2{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:560px){.pair{grid-template-columns:minmax(0,1fr)}.swap{margin:0 auto}.swap svg{transform:rotate(90deg)}}
+@media(max-width:600px){.prov summary{grid-template-columns:minmax(0,1fr) auto;row-gap:6px}.prov summary .c2{grid-column:1}.prov summary .c3{grid-column:2;text-align:right}.prov summary .chev{display:none}header nav{display:none}.bar{grid-template-columns:6.5em minmax(0,1fr) 4.8em}}
+@media(prefers-reduced-motion:reduce){.chev{transition:none}}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo"><i><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h14"/><path d="M13 6l6 6-6 6"/></svg></i>EnvoiMalin</div>
+  <nav><a href="#comparer">Comparer</a><a href="#comprendre">Comprendre les frais</a><a href="#sources">Sources</a></nav>
+</header>
+
+<main>
+  <section class="intro">
+    <h1>Combien vos proches reçoivent vraiment ?</h1>
+    <p>Les services d'envoi d'argent affichent souvent « 0 € de frais » mais se rémunèrent sur le taux de change. EnvoiMalin calcule le montant réellement reçu, frais et marge cachée compris, pour choisir le service le moins cher.</p>
+  </section>
+
+  <section class="card sim" id="comparer" aria-label="Simulation">
+    <div class="pair">
+      <div class="side" id="sideSend">
+        <label for="sendAmt">Vous envoyez</label>
+        <div class="money"><input id="sendAmt" inputmode="decimal" autocomplete="off" value="500"><span id="sendCur">EUR</span></div>
+        <div class="picker" id="fromPick"></div>
+      </div>
+      <button type="button" class="swap" id="swap" aria-label="Échanger les deux devises" title="Échanger les deux devises"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h15"/><path d="M15 4l4 4-4 4"/><path d="M20 16H5"/><path d="M9 12l-4 4 4 4"/></svg></button>
+      <div class="side" id="sideRecv">
+        <label for="recvAmt">Ils reçoivent</label>
+        <div class="money"><input id="recvAmt" inputmode="decimal" autocomplete="off"><span id="recvCur">MAD</span></div>
+        <div class="picker" id="toPick"></div>
+      </div>
+    </div>
+    <p class="hint" id="pairHint"></p>
+    <p class="err" id="err" role="alert"></p>
+    <div class="rate" id="rateLine"></div>
+    <div class="filters" role="group" aria-label="Type de service"><span>Afficher :</span>
+      <button type="button" data-f="all" aria-pressed="true">Tous</button>
+      <button type="button" data-f="mto" aria-pressed="false">Services de transfert</button>
+      <button type="button" data-f="bank" aria-pressed="false">Banques</button>
+    </div>
+  </section>
+
+  <div class="resHead"><h2 id="resTitle">Résultats</h2><p id="resSub"></p></div>
+  <div class="list" id="list" aria-live="polite"></div>
+
+  <section class="grid2">
+    <div class="card save" id="saveCard"></div>
+    <div class="card"><h3>Coût total par service</h3><p style="margin:4px 0 0;color:var(--mute);font-size:14px" id="barsSub">Frais affichés + marge sur le taux</p><div class="bars" id="bars"></div></div>
+  </section>
+
+  <section class="card edu" id="comprendre">
+    <h2>Comment on calcule</h2>
+    <ol>
+      <li><b>Le taux réel</b> (taux interbancaire) est le prix « juste » d'une devise. Il est mis à jour chaque jour automatiquement.</li>
+      <li><b>Les frais affichés</b> sont retirés du montant envoyé.</li>
+      <li><b>La marge cachée</b> : le service applique un taux moins bon que le taux réel. L'écart, converti en euros, est un coût que la plupart des clients ne voient pas.</li>
+      <li><b>Montant reçu</b> = (montant envoyé − frais) × taux réel × (1 − marge).</li>
+    </ol>
+    <p style="margin:12px 0 0;color:var(--mute)">Exemple : un service à « 0 € de frais » avec 2 % de marge coûte plus cher qu'un service à 4 € de frais sans marge dès que vous envoyez plus de 200 €.</p>
+  </section>
+
+  <section class="notice" id="sources">
+    <p><b>D'où viennent les tarifs :</b> pour chaque paire de devises, EnvoiMalin interroge en direct le comparateur public de Wise, qui relève les frais et les taux de chaque service (banques et services de transfert) et indique la date de chaque relevé. Wise figure lui-même dans la comparaison. Quand aucun service ne publie de tarif pour une paire, EnvoiMalin affiche ses propres relevés (euro vers dirham et dinar) ou, à défaut, les coûts moyens mesurés par la Banque mondiale. Les tarifs peuvent changer selon le montant, le pays d'envoi, le mode de paiement et les promotions. Vérifiez toujours le montant exact sur le simulateur officiel du service : EnvoiMalin ne transfère pas d'argent et ne touche aucune commission.</p>
+    <div class="sources"><b>Sources des frais</b><ul id="srcList"></ul>
+    <p style="margin:8px 0 0">Taux de change du jour : <a href="https://www.exchangerate-api.com" target="_blank" rel="noopener">ExchangeRate-API</a> (taux de référence quotidien).</p></div>
+  </section>
+</main>
+<footer>EnvoiMalin · Projet L3 MIAGE, Université de Bordeaux · Outil d'information, pas un conseil financier · <a href="https://github.com/yfaouari-crypto/envoimalin" target="_blank" rel="noopener">Code et documentation sur GitHub</a></footer>
+
+<script>
+{
+/* ===== Sources ===== */
+const SRC={
+  wafir:{t:"Wafir.ma, comparatif 1 000 € France → Maroc (16 mai 2026)",u:"https://wafir.ma/fr/guide/transferts-internationaux-maroc-wise-western-union-wafacash-comparatif"},
+  lesmre:{t:"LesMRE.com, guide des transferts vers le Maroc (mai 2026)",u:"https://www.lesmre.com/fr/guides/envoi-argent-maroc-transferts-optimises"},
+  demarches:{t:"DémarchesÉtrangers.fr, comparatif des services (2026)",u:"https://demarchesetrangers.fr/blog/envoyer-argent-etranger-france"},
+  wiseTn:{t:"Wise, page « Envoyer de l'argent en Tunisie » (coût d'un envoi de 1 000 €)",u:"https://wise.com/be/send-money/send-money-to-tunisia"},
+  lesafriques:{t:"LesAfriques.com, comparatif France → Tunisie (octobre 2026)",u:"https://lesafriques.com/2026/09/envoyer-argent-tunisie-comparatif-frais-taux-2026/"},
+  jechange:{t:"JeChange.fr d'après la Banque mondiale, coût des envois depuis la France",u:"https://www.jechange.fr/banques/news/envoyer-argent-famille-etranger-5-23-pourcent-france-18-59-pourcent-banque"},
+  worldbank:{t:"Banque mondiale, Remittance Prices Worldwide n° 53 (mars 2025), coût moyen d'un envoi de 200 $",u:"https://remittanceprices.worldbank.org/sites/default/files/rpw_main_report_and_annex_q125_1_0.pdf"}
+};
+
+/* ===== Frais relevés par couloir (montants fixes dans la devise d'envoi) =====
+   fix = frais fixes, pct = frais en %, margin = écart entre le taux appliqué et le taux réel (%)
+   pay = modes de réception : bank, cash, mobile */
+const CORRIDORS={
+  "EUR>MAD":{fallback:10.85,min:50,max:5000,providers:[
+    {name:"Wise",kind:"Virement vers un compte",fix:0.55,pct:0.36,margin:0,delay:"1 à 2 jours",pay:["bank"],url:"https://wise.com/fr/",src:"wafir",date:"mai 2026"},
+    {name:"Wise · retrait Wafacash",kind:"Retrait en espèces",fix:8.90,pct:0,margin:0.28,delay:"Quelques minutes",pay:["cash"],url:"https://wise.com/fr/",src:"wafir",date:"mai 2026"},
+    {name:"Revolut",kind:"Virement vers un compte",fix:5.50,pct:0,margin:0.18,delay:"1 à 3 jours",pay:["bank"],url:"https://www.revolut.com/fr-FR/",src:"wafir",date:"mai 2026"},
+    {name:"Remitly (Économique)",kind:"Virement vers un compte",fix:0,pct:0,margin:1,delay:"1 à 3 jours",pay:["bank","cash"],url:"https://www.remitly.com/",src:"lesmre",date:"mai 2026"},
+    {name:"Taptap Send",kind:"Compte ou mobile",fix:0,pct:0,margin:1,delay:"Quelques minutes",pay:["bank","mobile"],url:"https://www.taptapsend.com/fr",src:"demarches",date:"2026"},
+    {name:"Wafacash (en ligne)",kind:"Retrait en espèces",fix:6.50,pct:0,margin:0.92,delay:"Quelques minutes",pay:["cash"],url:"https://www.wafacash.com/",src:"wafir",date:"mai 2026"},
+    {name:"Western Union (en ligne)",kind:"Virement vers un compte",fix:9.90,pct:0,margin:1.38,delay:"1 jour",pay:["bank"],url:"https://www.westernunion.com/fr/fr/send-money-to-morocco.html",src:"wafir",date:"mai 2026"},
+    {name:"Ria",kind:"Retrait en espèces",fix:8.00,pct:0,margin:1.57,delay:"Quelques minutes",pay:["cash"],url:"https://www.riamoneytransfer.com/",src:"wafir",date:"mai 2026"},
+    {name:"Virement depuis une banque française",kind:"Virement international (SWIFT)",fix:22.50,pct:0,margin:1.38,delay:"2 à 5 jours",pay:["bank"],url:"",src:"wafir",date:"mai 2026"},
+    {name:"Western Union (agence)",kind:"Retrait en espèces",fix:12.50,pct:0,margin:2.76,delay:"Quelques minutes",pay:["cash"],url:"https://www.westernunion.com/fr/fr/send-money-to-morocco.html",src:"wafir",date:"mai 2026"}
+  ]},
+  "EUR>TND":{fallback:3.38,min:50,max:5000,providers:[
+    {name:"Taptap Send",kind:"Compte ou retrait",fix:0,pct:0,margin:1,delay:"Quelques minutes",pay:["bank","cash"],url:"https://www.taptapsend.com/fr",src:"demarches",date:"2026"},
+    {name:"Western Union",kind:"Retrait en espèces",fix:4.99,pct:0,margin:2.5,delay:"Quelques minutes",pay:["cash"],url:"https://www.westernunion.com/fr/fr/send-money-to-tunisia.html",src:"lesafriques",date:"octobre 2026"},
+    {name:"Wise",kind:"Virement vers un compte",fix:0,pct:4.28,margin:0,delay:"Quelques secondes à 2 jours",pay:["bank"],url:"https://wise.com/fr/",src:"wiseTn",date:"novembre 2026"},
+    {name:"Virement depuis une banque française",kind:"Virement en agence (SWIFT)",fix:36,pct:0,margin:2.53,delay:"2 à 5 jours",pay:["bank"],url:"",src:"jechange",date:"2025"}
+  ]}
+};
+/* Autres couloirs : coût total moyen par type de service (Banque mondiale, T1 2025, envoi de 200 $) */
+const GENERIC=[
+  {name:"Service 100 % en ligne",kind:"Type Wise, Remitly, Taptap Send",fix:0,pct:3.55,margin:0,delay:"Minutes à 2 jours",pay:["bank","mobile"],url:"",src:"worldbank",date:"mars 2025",avg:true},
+  {name:"Opérateur mobile",kind:"Envoi vers un portefeuille mobile",fix:0,pct:4.97,margin:0,delay:"Quelques minutes",pay:["mobile"],url:"",src:"worldbank",date:"mars 2025",avg:true},
+  {name:"Opérateur de transfert",kind:"Type Western Union, Ria, MoneyGram",fix:0,pct:5.04,margin:0,delay:"Quelques minutes",pay:["cash","bank"],url:"",src:"worldbank",date:"mars 2025",avg:true},
+  {name:"Bureau de poste",kind:"Mandat international",fix:0,pct:7.71,margin:0,delay:"1 à 5 jours",pay:["cash"],url:"",src:"worldbank",date:"mars 2025",avg:true},
+  {name:"Banque",kind:"Virement international (SWIFT)",fix:0,pct:14.55,margin:0,delay:"2 à 5 jours",pay:["bank"],url:"",src:"worldbank",date:"mars 2025",avg:true}
+];
+
+/* Devises proposées en premier, avec le pays (les autres viennent de la liste du service de taux) */
+const FEATURED_FROM=["EUR","USD","GBP","CAD","CHF","SEK","NOK","DKK","AUD","AED","SAR","QAR","JPY","CNY"];
+const FEATURED_TO=["MAD","TND","DZD","XOF","XAF","EGP","NGN","GHS","INR","PKR","BDT","PHP","VND","TRY","LBP","HTG","MGA","KMF","GNF","CDF","EUR","USD"];
+const COUNTRY={EUR:"zone euro",USD:"États-Unis",GBP:"Royaume-Uni",CAD:"Canada",CHF:"Suisse",SEK:"Suède",NOK:"Norvège",DKK:"Danemark",AUD:"Australie",AED:"Émirats arabes unis",SAR:"Arabie saoudite",QAR:"Qatar",JPY:"Japon",CNY:"Chine",MAD:"Maroc",TND:"Tunisie",DZD:"Algérie",XOF:"Sénégal, Côte d'Ivoire, Mali, Bénin…",XAF:"Cameroun, Gabon, Congo…",EGP:"Égypte",NGN:"Nigeria",GHS:"Ghana",INR:"Inde",PKR:"Pakistan",BDT:"Bangladesh",PHP:"Philippines",VND:"Viêt Nam",TRY:"Turquie",LBP:"Liban",HTG:"Haïti",MGA:"Madagascar",KMF:"Comores",GNF:"Guinée",CDF:"RD Congo",MXN:"Mexique",BRL:"Brésil",RON:"Roumanie",PLN:"Pologne",UAH:"Ukraine",RUB:"Russie",ZAR:"Afrique du Sud",KES:"Kenya",ETB:"Éthiopie",LKR:"Sri Lanka",NPR:"Népal",IDR:"Indonésie",THB:"Thaïlande",KRW:"Corée du Sud",HKD:"Hong Kong",SGD:"Singapour",NZD:"Nouvelle-Zélande",ILS:"Israël",JOD:"Jordanie",KWD:"Koweït",BHD:"Bahreïn",OMR:"Oman",MRU:"Mauritanie",CVE:"Cap-Vert",GMD:"Gambie",SLL:"Sierra Leone",RWF:"Rwanda",BIF:"Burundi",UGX:"Ouganda",TZS:"Tanzanie",AOA:"Angola",MZN:"Mozambique",COP:"Colombie",PEN:"Pérou",ARS:"Argentine",CLP:"Chili",DOP:"Rép. dominicaine",CZK:"Tchéquie",HUF:"Hongrie",BGN:"Bulgarie",RSD:"Serbie",ALL:"Albanie",AMD:"Arménie",GEL:"Géorgie",AZN:"Azerbaïdjan",KZT:"Kazakhstan",IQD:"Irak",SYP:"Syrie",IRR:"Iran",AFN:"Afghanistan",MYR:"Malaisie",TWD:"Taïwan",MUR:"Maurice",SCR:"Seychelles",LYD:"Libye",SDG:"Soudan",XPF:"Polynésie, Nouvelle-Calédonie"};
+/* Toutes les devises en circulation (ISO 4217) : la liste est complète même si le service de taux ne répond pas */
+const ALL_CODES="AED AFN ALL AMD ANG AOA ARS AUD AWG AZN BAM BBD BDT BGN BHD BIF BMD BND BOB BRL BSD BTN BWP BYN BZD CAD CDF CHF CLP CNY COP CRC CUP CVE CZK DJF DKK DOP DZD EGP ERN ETB EUR FJD FKP GBP GEL GHS GIP GMD GNF GTQ GYD HKD HNL HTG HUF IDR ILS INR IQD IRR ISK JMD JOD JPY KES KGS KHR KMF KRW KWD KYD KZT LAK LBP LKR LRD LSL LYD MAD MDL MGA MKD MMK MNT MOP MRU MUR MVR MWK MXN MYR MZN NAD NGN NIO NOK NPR NZD OMR PAB PEN PGK PHP PKR PLN PYG QAR RON RSD RUB RWF SAR SBD SCR SDG SEK SGD SHP SLE SOS SRD SSP STN SYP SZL THB TJS TMT TND TOP TRY TTD TWD TZS UAH UGX USD UYU UZS VES VND VUV WST XAF XCD XOF XPF YER ZAR ZMW ZWL".split(" ");
+
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const fmt=(v,d=2)=>v.toLocaleString("fr-FR",{minimumFractionDigits:d,maximumFractionDigits:d});
+const loc=(v,cur)=>fmt(v)+" "+cur;
+const toNum=s=>{const v=String(s).replace(/\s|€/g,"").replace(",",".");return /^\d+(\.\d{1,2})?$/.test(v)?parseFloat(v):NaN};
+let curNames=null;try{curNames=new Intl.DisplayNames(["fr"],{type:"currency"})}catch(e){}
+const curName=c=>{let n=c;try{n=curNames?curNames.of(c):c}catch(e){}return n&&n!==c?n.charAt(0).toUpperCase()+n.slice(1):c};
+const label=c=>`${c} · ${curName(c)}${COUNTRY[c]?" · "+COUNTRY[c]:""}`;
+
+let state={mode:"send",from:"EUR",to:"MAD",filter:"all",rates:null,rateDate:null,live:false};
+try{const s=JSON.parse(localStorage.getItem("envoimalin")||"{}");if(ALL_CODES.includes(s.from))state.from=s.from;if(ALL_CODES.includes(s.to))state.to=s.to;if(s.mode==="recv"||s.mode==="send")state.mode=s.mode;if(s.value)(state.mode==="recv"?$("recvAmt"):$("sendAmt")).value=s.value}catch(e){}
+const activeInput=()=>state.mode==="recv"?$("recvAmt"):$("sendAmt");
+const otherInput=()=>state.mode==="recv"?$("sendAmt"):$("recvAmt");
+const save=()=>{try{localStorage.setItem("envoimalin",JSON.stringify({from:state.from,to:state.to,mode:state.mode,value:activeInput().value}))}catch(e){}};
+
+/* ===== Sélecteur de devise : recherche + liste qui défile (molette, doigt ou flèches ↑ ↓) ===== */
+const norm=t=>t.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();
+function makePicker(el,key,featured,aria){
+  el.innerHTML=`<div class="pickField"><svg class="mag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input type="text" class="pickInput" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="${el.id}-list" aria-label="${aria} : rechercher une devise ou un pays" placeholder="Rechercher : dirham, Maroc, USD…" autocomplete="off" spellcheck="false"><svg class="chev2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></div>
+  <div class="pickPanel" hidden><p class="pickHelp">Tapez pour chercher, ou faites défiler avec la molette, le doigt ou les flèches ↑ ↓, puis Entrée.</p><ul class="pickList" id="${el.id}-list" role="listbox" aria-label="${aria}"></ul></div>`;
+  const q=el.querySelector(".pickInput"),panel=el.querySelector(".pickPanel"),ul=el.querySelector("ul");
+  let items=[],cur=-1,typed=false;
+  const display=()=>state[key]+" · "+curName(state[key])+(COUNTRY[state[key]]?" · "+COUNTRY[state[key]]:"");
+  const show=()=>{if(panel.hidden)q.value=display()};
+  function build(){
+    const t=typed?norm(q.value.trim()):"";
+    const match=c=>!t||norm(c+" "+curName(c)+" "+(COUNTRY[c]||"")).includes(t);
+    const all=ALL_CODES.slice().sort((a,b)=>curName(a).localeCompare(curName(b),"fr"));
+    const f=featured.filter(c=>ALL_CODES.includes(c)),rest=all.filter(c=>match(c)&&(t||!f.includes(c)));
+    let n=0;const li=c=>`<li role="option" id="${el.id}-o${n++}" data-c="${c}" aria-selected="${c===state[key]}"><b>${c}</b><span>${esc(curName(c))}${COUNTRY[c]?" · "+esc(COUNTRY[c]):""}</span></li>`;
+    ul.innerHTML=t?(rest.length?rest.map(li).join(""):`<li class="none">Aucune devise ne correspond à « ${esc(q.value.trim())} ».</li>`)
+      :`<li class="grp" role="presentation">Principales</li>${f.map(li).join("")}<li class="grp" role="presentation">Toutes les autres devises</li>${rest.map(li).join("")}`;
+    items=[...ul.querySelectorAll("[role=option]")];
+    cur=t?0:Math.max(0,items.findIndex(x=>x.dataset.c===state[key]));hl();
+  }
+  function hl(){items.forEach((x,i)=>x.classList.toggle("cur",i===cur));const x=items[cur];if(x){q.setAttribute("aria-activedescendant",x.id);x.scrollIntoView({block:"nearest"})}else q.removeAttribute("aria-activedescendant")}
+  const open=()=>{if(!panel.hidden)return;closeAll(el);el.classList.add("open");panel.hidden=false;q.setAttribute("aria-expanded","true");typed=false;q.value="";build()};
+  const close=()=>{if(panel.hidden)return;el.classList.remove("open");panel.hidden=true;q.setAttribute("aria-expanded","false");q.removeAttribute("aria-activedescendant");q.value=display()};
+  const choose=c=>{state[key]=c;close();q.blur();render()};
+  q.addEventListener("focus",open);
+  q.addEventListener("click",open);
+  el.querySelector(".chev2").addEventListener("click",()=>{panel.hidden?q.focus():close()});
+  q.addEventListener("input",()=>{if(panel.hidden)open();typed=true;build()});
+  q.addEventListener("keydown",e=>{
+    if(panel.hidden&&(e.key==="ArrowDown"||e.key==="Enter")){e.preventDefault();open();return}
+    if(e.key==="ArrowDown"){e.preventDefault();cur=Math.min(items.length-1,cur+1);hl()}
+    else if(e.key==="ArrowUp"){e.preventDefault();cur=Math.max(0,cur-1);hl()}
+    else if(e.key==="PageDown"){e.preventDefault();cur=Math.min(items.length-1,cur+8);hl()}
+    else if(e.key==="PageUp"){e.preventDefault();cur=Math.max(0,cur-8);hl()}
+    else if(e.key==="Enter"){e.preventDefault();if(items[cur])choose(items[cur].dataset.c)}
+    else if(e.key==="Escape"||e.key==="Tab"){close()}});
+  ul.addEventListener("mousedown",e=>e.preventDefault());
+  ul.onclick=e=>{const o=e.target.closest("[role=option]");if(o)choose(o.dataset.c)};
+  el._close=close;el._show=show;show();
+}
+const pickers=[];
+function closeAll(except){pickers.forEach(p=>{if(p!==except)p._close()})}
+document.addEventListener("click",e=>{if(!e.target.closest(".picker"))closeAll()});
+
+/* ===== Tarifs en direct : comparateur public de Wise =====
+   Pour chaque service : frais, marge sur le taux, taux appliqué, montant reçu, date du relevé.
+   Si aucun service ne publie de tarif pour la paire (ou si le service ne répond pas), on se rabat sur
+   nos relevés (EUR → MAD / TND) puis sur les moyennes de la Banque mondiale. */
+const LIVE_SRC={t:"Comparateur public de Wise : tarifs relevés auprès de chaque service (banques et services de transfert)",u:"https://wise.com/fr/compare/"};
+const SITES={wise:"https://wise.com/fr/","western-union":"https://www.westernunion.com/fr/fr/",remitly:"https://www.remitly.com/",moneygram:"https://www.moneygram.com/",xoom:"https://www.xoom.com/",ofx:"https://www.ofx.com/",worldremit:"https://www.worldremit.com/",instarem:"https://www.instarem.com/",skrill:"https://www.skrill.com/","la-banque-postale":"https://www.labanquepostale.fr/",bnp:"https://mabanque.bnpparibas/",monese:"https://monese.com/"};
+const COUNTRY_FR={FR:"France",DE:"Allemagne",ES:"Espagne",IT:"Italie",NL:"Pays-Bas",BE:"Belgique",GB:"Royaume-Uni",US:"États-Unis",CA:"Canada",CH:"Suisse",AU:"Australie",JP:"Japon",IE:"Irlande",PT:"Portugal",AT:"Autriche"};
+const cache={};let pending=null,timer=null;
+const quoteKey=(F,T,mode,v)=>`${F}>${T}>${mode}>${v}`;
+function durationTxt(d){if(!d||!d.duration||!d.duration.max)return"Délai non communiqué";const m=/PT(\d+)H/.exec(d.duration.max);if(!m)return"Délai non communiqué";const h=+m[1];return h<1?"Moins d'une heure":h<24?`Environ ${h} h`:`Environ ${Math.round(h/24)} jour${h>=48?"s":""}`}
+async function fetchLive(F,T,mode,v){
+  const k=quoteKey(F,T,mode,v);if(cache[k])return;
+  cache[k]={status:"loading"};
+  try{
+    const url=`https://api.wise.com/v4/comparisons/?sourceCurrency=${F}&targetCurrency=${T}&${mode==="recv"?"recipientGetsAmount":"sendAmount"}=${v}`;
+    const r=await fetch(url);if(!r.ok)throw 0;const j=await r.json();
+    const rows=(j.providers||[]).map(p=>{
+      const qs=p.quotes||[];if(!qs.length)return null;
+      const q=qs.find(x=>x.sourceCountry==="FR")||qs.slice().sort((a,b)=>Date.parse(b.dateCollected)-Date.parse(a.dateCollected))[0];
+      const send=mode==="recv"?q.sendAmount:v,recv=mode==="recv"?v:q.receivedAmount;
+      if(!(send>0)||!(recv>0))return null;
+      const fee=q.fee||0,markup=q.markup||0,hidden=Math.max(0,(send-fee)*markup/100);
+      return{name:p.name,kind:p.type==="bank"?"Banque":"Service de transfert",type:p.type==="bank"?"bank":"mto",fee,markup,rate:q.rate,send,recv,hidden,cost:fee+hidden,
+        delay:durationTxt(q.deliveryEstimation),date:q.dateCollected,from:q.sourceCountry,url:SITES[p.alias]||"",src:LIVE_SRC,live:true};
+    }).filter(Boolean);
+    cache[k]={status:rows.length?"ok":"empty",rows};
+  }catch(e){cache[k]={status:"error"}}
+  if(quoteKey(state.from,state.to,state.mode,toNum(activeInput().value))===k)render();
+}
+
+/* Calculs de secours (relevés manuels et moyennes) */
+const corridor=()=>CORRIDORS[state.from+">"+state.to]||null;
+function midRate(){
+  if(state.from===state.to)return 1;
+  if(state.rates&&state.rates[state.from]&&state.rates[state.to])return state.rates[state.to]/state.rates[state.from];
+  const c=corridor();return c?c.fallback:null;
+}
+function rowFrom(p,mode,v,mid){
+  let A=v;if(mode==="recv"){const rate=mid*(1-p.margin/100);A=(v/rate+p.fix)/(1-p.pct/100)}
+  const fee=p.fix+A*p.pct/100,net=A-fee;if(net<=0)return null;
+  const rate=mid*(1-p.margin/100),hidden=net*p.margin/100;
+  return{name:p.name,kind:p.kind,type:/banque|poste/i.test(p.name)?"bank":"mto",fee,markup:p.margin,pct:p.pct,rate,send:A,recv:net*rate,hidden,cost:fee+hidden,delay:p.delay,dateTxt:p.date,url:p.url,src:SRC[p.src],avg:!!p.avg};
+}
+
+function clearResults(){otherInput().value="";$("pairHint").textContent="";$("list").innerHTML="";$("bars").innerHTML="";$("saveCard").innerHTML="";$("resSub").textContent=""}
+const fmtDate=d=>{const t=new Date(d);return isNaN(t)?"":t.toLocaleDateString("fr-FR",{day:"numeric",month:"long"})+" à "+t.toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"})};
+
+function render(){
+  const F=state.from,T=state.to,mid=midRate(),err=$("err"),recvMode=state.mode==="recv",cor=corridor();
+  const money=x=>loc(x,F);
+  $("sendCur").textContent=F;$("recvCur").textContent=T;
+  $("sideSend").classList.toggle("active",!recvMode);$("sideRecv").classList.toggle("active",recvMode);
+  $("swap").setAttribute("aria-label",`Échanger les devises : ${F} et ${T}`);$("swap").title=`Échanger ${F} et ${T}`;
+  document.querySelectorAll(".filters button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.f===state.filter));
+  err.textContent="";
+  $("rateLine").innerHTML=mid?`<span><span class="dot ${state.live?"":"off"}"></span>Taux réel : <b>1 ${F} = ${fmt(mid,mid<0.1?6:4)} ${T}</b></span><span>${state.live?`mis à jour le ${esc(state.rateDate)}`:"taux de secours"}</span>`
+    :`<span><span class="dot off"></span>${state.rates?`Pas de taux du jour pour ${esc(state.rates[F]?T:F)} pour le moment.`:"Chargement du taux du jour…"}</span>`;
+  const v=toNum(activeInput().value);
+  if(isNaN(v)||v<=0){err.textContent="Indiquez un montant valide, par exemple 500.";clearResults();return}
+  if(F===T){err.textContent="Choisissez deux devises différentes.";clearResults();return}
+  save();
+  const k=quoteKey(F,T,state.mode,v),live=cache[k];
+  if(!live){clearTimeout(timer);timer=setTimeout(()=>fetchLive(F,T,state.mode,v),350);showLoading();return}
+  if(live.status==="loading"){showLoading();return}
+  let rows,mode;
+  if(live.status==="ok"){rows=live.rows;mode="live"}
+  else if(mid&&cor){rows=cor.providers.map(p=>rowFrom(p,state.mode,v,mid)).filter(Boolean);mode="releve"}
+  else if(mid){rows=GENERIC.map(p=>rowFrom(p,state.mode,v,mid)).filter(Boolean);mode="avg"}
+  else{clearResults();$("list").innerHTML=`<div class="prov empty">Aucun tarif ni taux disponible pour ${F} → ${T} pour le moment.</div>`;return}
+  const all=rows.length;
+  rows=rows.filter(r=>state.filter==="all"||r.type===state.filter);
+  rows.sort(recvMode?(a,b)=>a.send-b.send:(a,b)=>b.recv-a.recv);
+  $("resTitle").textContent=recvMode?`Combien envoyer pour que vos proches reçoivent ${loc(v,T)}`:`Ce que vos proches reçoivent pour ${money(v)}`;
+  const why=live.status==="empty"?`Aucun service ne publie de tarif pour un envoi de ${esc(curName(F))} (${F}) vers ${esc(curName(T))} (${T}). C'est souvent le cas des devises soumises à un contrôle des changes, qui ne peuvent pas être envoyées librement depuis l'étranger.`:`Les tarifs en direct sont momentanément indisponibles.`;
+  const note=mode==="live"?`<div class="genNote" style="background:var(--posBg)"><b>Tarifs réels, service par service.</b> ${all} service${all>1?"s":""} comparé${all>1?"s":""} pour ${F} → ${T}, avec la date de chaque relevé. Données issues du comparateur public de Wise, qui figure lui-même dans la liste : vérifiez toujours sur le site du service avant d'envoyer.</div>`
+    :mode==="releve"?`<div class="genNote">${why} Affichage de nos relevés manuels pour ${F} → ${T} (sources en bas de page).</div>`
+    :`<div class="genNote"><b>Estimation par type de service.</b> ${why} Le calcul utilise le taux réel du jour et le coût moyen de chaque type de service mesuré par la Banque mondiale.</div>`;
+  $("resSub").textContent=rows.length?`${rows.length} ${mode==="avg"?"type":"service"}${rows.length>1?"s":""}, du moins cher au plus cher`:"";
+  if(!rows.length){otherInput().value="";$("pairHint").textContent="";$("list").innerHTML=note+`<div class="prov empty">Aucun ${state.filter==="bank"?"établissement bancaire":"service de transfert"} pour cette paire. Choisissez « Tous ».</div>`;$("bars").innerHTML="";$("saveCard").innerHTML="";return}
+  const best=rows[0];
+  otherInput().value=fmt(recvMode?best.send:best.recv);
+  $("pairHint").textContent=`${recvMode?"Montant à envoyer":"Montant reçu"} avec ${mode==="avg"?"le type de service le moins cher en moyenne : "+best.name.toLowerCase():"le service le moins cher : "+best.name}. Le détail est juste en dessous.`;
+  $("list").innerHTML=note+rows.map((r,i)=>{const diff=recvMode?r.send-best.send:best.recv-r.recv;
+    const when=r.live?`Tarif relevé le ${esc(fmtDate(r.date))}${r.from&&r.from!=="FR"?` depuis ${esc(COUNTRY_FR[r.from]||r.from)}`:""}`:`Frais relevés en ${esc(r.dateTxt)}`;
+    return`<details class="prov ${i===0?"best":""}"><summary>
+      <span class="pname"><b>${esc(r.name)}${i===0?`<span class="badge">${mode==="avg"?"Le moins cher en moyenne":"Meilleur choix"}</span>`:""}</b><small>${esc(r.kind)} · ${esc(r.delay)}</small></span>
+      <span class="c2">${recvMode?`<span class="lbl">Vous envoyez</span><span class="big amt">${money(r.send)}</span>`:`<span class="lbl">Ils reçoivent${r.avg?" (env.)":""}</span><span class="big amt">${loc(r.recv,T)}</span>`}</span>
+      <span class="c3"><span class="lbl">Coût total</span><span class="cost amt">${money(r.cost)}</span>${i>0?`<span class="lbl n">${recvMode?`+ ${money(diff)}`:`− ${loc(diff,T)}`}</span>`:`<span class="lbl p">le moins cher</span>`}</span>
+      <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+    </summary><div class="detail">
+      ${r.avg?`<div class="dgrid"><div><span class="lbl">Coût total moyen</span><b class="amt">${fmt(r.pct,2)} % · ${money(r.cost)}</b></div><div><span class="lbl">Taux réel du jour</span><b class="amt">1 ${F} = ${fmt(mid,4)}</b></div></div>
+      <p>Moyenne mondiale mesurée par la Banque mondiale (frais + marge de change, envoi de 200 $). Source : <a href="${r.src.u}" target="_blank" rel="noopener">${esc(r.src.t)}</a></p>`
+      :`<div class="dgrid">
+        <div><span class="lbl">Frais affichés</span><b class="amt">${money(r.fee)}</b></div>
+        <div><span class="lbl">Taux appliqué</span><b class="amt">1 ${F} = ${fmt(r.rate,4)}</b></div>
+        <div><span class="lbl">Marge cachée sur le taux</span><b class="amt ${r.markup?"n":""}">${money(r.hidden)} (${fmt(r.markup,2)} %)</b></div>
+        <div><span class="lbl">Coût total</span><b class="amt">${money(r.cost)} (${fmt(r.cost/r.send*100,1)} %)</b></div>
+      </div>
+      <p>${when} · source : <a href="${r.src.u}" target="_blank" rel="noopener">${esc(r.src.t)}</a></p>`}
+      ${r.url?`<a class="go" href="${r.url}" target="_blank" rel="noopener">Vérifier le tarif exact sur le site de ${esc(r.name)} →</a>`:""}
+    </div></details>`}).join("");
+  $("barsSub").textContent=`Frais affichés + marge sur le taux, en ${F}`;
+  const maxC=Math.max(...rows.map(r=>r.cost),1e-9);
+  $("bars").innerHTML=rows.map((r,i)=>`<div class="bar ${i===0?"best":""}"><span>${esc(r.name)}</span><span class="t"><i style="width:${r.cost/maxC*100}%"></i></span><span class="amt">${fmt(r.cost)}</span></div>`).join("");
+  const ref=rows[rows.length-1],gain=ref.cost-best.cost;
+  $("saveCard").innerHTML=rows.length<2?`<h3>Économie</h3><p>Un seul service correspond à ce filtre.</p>`:
+    `<h3>Économie sur cet envoi${mode==="avg"?" (en moyenne)":""}</h3><b class="p amt">${money(gain)}</b>
+    <p>en choisissant <strong>${esc(best.name)}</strong> plutôt que <strong>${esc(ref.name)}</strong>, le plus cher${recvMode?"":`, soit ${loc(best.recv-ref.recv,T)} de plus pour vos proches`}.</p>
+    <p style="margin-top:10px">Si vous envoyez ce montant chaque mois : <strong class="p amt">${money(gain*12)}</strong> économisés par an.</p>`;
+}
+function showLoading(){$("resSub").textContent="";$("pairHint").textContent="Recherche des tarifs de chaque service…";$("list").innerHTML=`<div class="prov empty"><span class="spin"></span>Recherche des tarifs en direct pour ${state.from} → ${state.to}…</div>`;$("bars").innerHTML="";$("saveCard").innerHTML=""}
+
+/* ===== Taux du jour ===== */
+async function loadRates(){
+  const sources=[
+    async()=>{const j=await (await fetch("https://open.er-api.com/v6/latest/EUR")).json();if(j.result!=="success")throw 0;return{rates:j.rates,t:j.time_last_update_unix*1000}},
+    async()=>{const j=await (await fetch("https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/eur.json")).json();const r={};for(const k in j.eur)r[k.toUpperCase()]=j.eur[k];return{rates:r,t:Date.parse(j.date)}}
+  ];
+  for(const get of sources){try{const d=await get();state.rates=d.rates;state.live=true;state.rateDate=new Date(d.t).toLocaleDateString("fr-FR",{day:"numeric",month:"long",year:"numeric"});break}catch(e){}}
+  render();
+}
+
+/* ===== Événements : la case où l'on tape devient « active », l'autre affiche le résultat ===== */
+const clean=inp=>{const v=toNum(inp.value);if(!isNaN(v))inp.value=String(Math.round(v*100)/100).replace(".",",")};
+function setMode(m){if(m===state.mode)return;state.mode=m;clean(activeInput());render()}
+$("sendAmt").addEventListener("input",()=>{state.mode="send";render()});
+$("recvAmt").addEventListener("input",()=>{state.mode="recv";render()});
+$("sendAmt").addEventListener("focus",()=>setMode("send"));
+$("recvAmt").addEventListener("focus",()=>setMode("recv"));
+/* La flèche échange les deux devises : EUR → TND devient TND → EUR, le montant saisi est conservé */
+let turns=0;
+$("swap").onclick=()=>{[state.from,state.to]=[state.to,state.from];$("fromPick")._close();$("toPick")._close();$("fromPick")._show();$("toPick")._show();
+  turns++;$("swap").style.transform=`rotate(${turns*180}deg)`;render()};
+pickers.push($("fromPick"),$("toPick"));
+makePicker($("fromPick"),"from",["EUR","USD"],"Devise envoyée");
+makePicker($("toPick"),"to",["EUR","USD"],"Devise reçue");
+document.querySelector(".filters").onclick=e=>{const b=e.target.closest("[data-f]");if(b){state.filter=b.dataset.f;render()}};
+$("srcList").innerHTML=[LIVE_SRC,...Object.values(SRC)].map(x=>`<li><a href="${x.u}" target="_blank" rel="noopener">${esc(x.t)}</a></li>`).join("");
+render();loadRates();
+}
+</script>
+</body>
+</html>
