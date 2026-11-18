@@ -6,6 +6,8 @@ EnvoiMalin compare les frais d'envoi d'argent à l'étranger. Pour chaque servic
 
 **Site en ligne :** https://yfaouari-crypto.github.io/envoimalin/
 
+**Kanban du projet (lecture seule) :** [tableau Scrum sur CryptPad](https://cryptpad.fr/kanban/#/2/kanban/view/SQKf5+G0nboPRSnDIh6vCJ5spxdjhNDs3P7iaa6pfS4/)
+
 Projet de semestre : Licence 3 MIAGE, Université de Bordeaux, méthode agile Scrum (Prof. R. Berty), 2026-2027.
 
 ---
@@ -48,7 +50,7 @@ EnvoiMalin **ne transfère pas d'argent** et ne collecte **aucune donnée person
 | Ariel | Scrum Master |
 | Imhotep | Lead technique : relecture du code, tests, fiabilité des données |
 
-Sprints de 2 semaines · Daily Scrum le lundi, le mercredi et le vendredi · Kanban sur CryptPad.
+Sprints de 2 semaines · Daily Scrum le lundi, le mercredi et le vendredi · [Kanban sur CryptPad](https://cryptpad.fr/kanban/#/2/kanban/view/SQKf5+G0nboPRSnDIh6vCJ5spxdjhNDs3P7iaa6pfS4/).
 
 ## Choix techniques
 
