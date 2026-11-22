@@ -23,11 +23,13 @@ La deuxième partie ne se voit presque jamais. Beaucoup de services annoncent «
 
 ## La cible
 
-| Persona | Situation | Ce qu'il veut savoir |
+Nos cas d'usage viennent de l'équipe elle-même :
+
+| Qui | Situation | Ce qu'il veut savoir |
 |---|---|---|
-| **Karim, 21 ans, étudiant tunisien à Bordeaux** | Reçoit de l'argent de ses parents chaque mois | Quel service fait perdre le moins d'argent à sa famille |
-| **Aya, 45 ans, salariée, diaspora ivoirienne** | Envoie 300 à 500 € par mois à sa mère à Abidjan | Combien sa mère reçoit vraiment, et où |
-| **Lucas, 23 ans, en échange au Canada** | Envoie ponctuellement des euros vers le dollar canadien | Si sa banque ou un service en ligne est moins cher |
+| **Youssef, étudiant tunisien à Bordeaux** | Envois d'argent entre la France et la Tunisie | Quel service fait perdre le moins d'argent à sa famille |
+| **Ariel, étudiant ivoirien à Bordeaux** | Envois d'argent entre la France et la Côte d'Ivoire | Quel service fait perdre le moins d'argent à sa famille |
+| **Imhotep, le regard extérieur** | N'envoie pas d'argent à l'étranger | Que les chiffres affichés soient justes et vérifiables |
 
 ## La solution
 
