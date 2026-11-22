@@ -8,12 +8,14 @@ Notre sujet : **EnvoiMalin, un comparateur des frais d'envoi d'argent à l'étra
 
 ## Le problème
 
-Quand on envoie de l'argent à sa famille à l'étranger, on paie deux choses :
+Quand on envoie de l'argent à sa famille à l'étranger, une question revient toujours : **avec quel service ma famille perd-elle le moins d'argent ?**
+
+Il est très difficile d'y répondre, parce que chaque service a ses propres frais et son propre taux de change. Le coût se compose de deux parties :
 
 1. **les frais affichés** (par exemple 4,99 €) ;
-2. **une marge cachée sur le taux de change** : le service applique un taux moins bon que le taux réel, et garde la différence.
+2. **une marge sur le taux de change** : le service applique un taux moins bon que le taux réel, et garde la différence.
 
-La deuxième partie ne se voit presque jamais. Beaucoup de services annoncent « 0 € de frais » et se rémunèrent uniquement sur le taux. Résultat :
+La deuxième partie ne se voit presque jamais : beaucoup de services annoncent « 0 € de frais » et se rémunèrent uniquement sur le taux. Impossible donc de comparer d'un coup d'œil. Résultat :
 
 - selon la Banque mondiale, envoyer de l'argent coûte en moyenne **6,49 %** du montant dans le monde, et **14,55 %** en passant par une banque (rapport *Remittance Prices Worldwide* n° 53, mars 2025) ;
 - vers la Tunisie, sur un envoi de 1 000 €, l'écart entre le service le moins cher et le plus cher atteignait **environ 64 €** le 18 novembre 2026 (3 314,60 TND avec MoneyGram contre 3 103,34 TND avec ABN AMRO) ;
@@ -44,7 +46,7 @@ Le calcul inverse est aussi possible : « mes proches doivent recevoir 200 000 f
 ## Vision produit (en une phrase)
 
 > **Pour** les personnes qui envoient de l'argent à leurs proches à l'étranger,
-> **qui** perdent de l'argent sans le savoir à cause des marges cachées sur le taux de change,
+> **qui** ne savent pas avec quel service leur famille perd le moins d'argent,
 > **EnvoiMalin est** un comparateur en ligne
 > **qui** montre le montant réellement reçu, frais et marge compris, pour chaque service.
 > **Contrairement aux** sites des services eux-mêmes, qui mettent en avant leurs propres frais,
