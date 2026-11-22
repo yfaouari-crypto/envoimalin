@@ -14,7 +14,7 @@ Projet de semestre : Licence 3 MIAGE, Université de Bordeaux, méthode agile Sc
 
 ## Le problème
 
-Beaucoup de services affichent « 0 € de frais » mais appliquent un taux de change moins bon que le taux réel. Cette marge ne se voit pas. Selon la Banque mondiale, envoyer de l'argent coûte en moyenne **6,49 %** du montant, et **14,55 %** par une banque (mars 2025).
+Quand on envoie de l'argent à sa famille, on veut savoir **avec quel service elle perd le moins d'argent**. Difficile à dire : chaque service a ses propres frais et son propre taux de change, et beaucoup affichent « 0 € de frais » tout en appliquant un taux moins bon que le taux réel. Selon la Banque mondiale, envoyer de l'argent coûte en moyenne **6,49 %** du montant, et **14,55 %** par une banque (mars 2025).
 
 ## Ce que fait le site
 
